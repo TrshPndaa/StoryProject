@@ -12,8 +12,8 @@ const storyData =  {
     title: "Chapter 2: The Town of Glendor",
     description: "You arrive in the town of Glendor. What will you do?",
     choices: [
-      { text: "Buy healing potions (+2 Karma)", next: "chapter3", karma: 2, gold: -50, potions: 1 },
-      { text: "Buy better weapons (-2 Karma, +1 attack power)", next: "chapter3", karma: -2, gold: -100 },
+      { text: "Buy healing potions. Spend 200 gold (+2 Karma)", next: "chapter3", karma: 2, gold: -200, potions: 1 },
+      { text: "Buy better weapons. Spend 100 gold (-2 Karma, +1 attack power)", next: "chapter3", karma: -2, gold: -100 },
       { text: "Save gold for later (Neutral)", next: "chapter3" },
     ],
   },

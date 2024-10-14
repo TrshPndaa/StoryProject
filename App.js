@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import storyData from './Story.js';
 
 
@@ -14,16 +13,17 @@ function App(setJackAlive, setOliverAlive){
 
   function handleChoice(choice, choices){
     for(let i = 0; i<choices.length; i++){
-      // console.log("setJackAlive" in choices[i])
-      // console.log(choices[i])
       if ("setJackAlive" in choices[i]){
         updateJackAlive(false)
-        // console.log("true")
       }
       console.log(choice)
       console.log(choices)
       console.log("-------------------")
     }
+    for(let i = 0; i<choices.length; i++){
+      if ("setOliverAlive" in choices[i]){
+        updateOliverAlive(false)
+      }}
     if (choice.karma) setKarma(karma + choice.karma);
     if (choice.gold) setGold(gold + choice.gold);
     if (choice.potions) setPotions(potions + (choice.potions || 0));
