@@ -1,46 +1,34 @@
 import React, { useState } from 'react';
 import storyData from './Story.js';
+import DeadCheck from './IsAlive.js';
 
-
-
-function App(setJackAlive, setOliverAlive){
+function App() {
   const [karma, setKarma] = useState(0);
-  const [gold, setGold] = useState(200); 
+  const [gold, setGold] = useState(200);
   const [potions, setPotions] = useState(0);
   const [chapter, setChapter] = useState('chapter1');
-  const [jackAlive, updateJackAlive] = useState(true)
-  const [oliverAlive, updateOliverAlive] = useState(true)
+  const [jackAlive, setJackAlive] = useState(true);
+  const [oliverAlive, setOliverAlive] = useState(true);
 
-  function handleChoice(choice, choices){
-    for(let i = 0; i<choices.length; i++){
-      if ("setJackAlive" in choices[i]){
-        updateJackAlive(false)
-      }
-      console.log(choice)
-      console.log(choices)
-      console.log("-------------------")
+  function handleChoice(choice) {
+    if (choice.setJackAlive) {
+      setJackAlive(false);
     }
-    for(let i = 0; i<choices.length; i++){
-      if ("setOliverAlive" in choices[i]){
-        updateOliverAlive(false)
-      }}
+    if (choice.setOliverAlive) {
+      setOliverAlive(false);
+    }
+  
     if (choice.karma) setKarma(karma + choice.karma);
     if (choice.gold) setGold(gold + choice.gold);
     if (choice.potions) setPotions(potions + (choice.potions || 0));
+  
 
-    if ("updateJackAlive" in choices.keys)
-
-    if (choice.requiresJackAlive & setJackAlive === false) {
-      alert('Jack is not alive, you cannot make this choice!');
-      return;
+    if (!DeadCheck(choice, jackAlive, oliverAlive)) {
+      return; 
     }
-    if (choice.requiresOliverAlive && !setOliverAlive) {
-      alert('OLiver is not alive, you cannot make this choice!');
-      return;
-    }
-
+  
     setChapter(choice.next);
-  };
+  }
 
   const currentChapter = storyData[chapter];
 
@@ -50,8 +38,7 @@ function App(setJackAlive, setOliverAlive){
       <p>{currentChapter.description}</p>
       <div className="choices">
         {currentChapter.choices && currentChapter.choices.map((choice, index) => (
-          
-          <button key={index} onClick={() => handleChoice(choice, currentChapter.choices)}>
+          <button key={index} onClick={() => handleChoice(choice)}>
             {choice.text}
           </button>
         ))}
@@ -61,10 +48,10 @@ function App(setJackAlive, setOliverAlive){
         <p>Gold: {gold}</p>
         <p>Healing Potions: {potions}</p>
         <p>Jack Alive: {jackAlive ? 'Yes' : 'No'}</p>
-        <p>Oliver Alive: {oliverAlive ? 'Yes' : 'no'}</p>
+        <p>Oliver Alive: {oliverAlive ? 'Yes' : 'No'}</p>
       </div>
     </div>
   );
-};
+}
 
 export default App;

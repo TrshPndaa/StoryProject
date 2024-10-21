@@ -10,7 +10,7 @@ const storyData =  {
   },
   chapter2: {
     title: "Chapter 2: The Town of Glendor",
-    description: "You arrive in the town of Glendor. What will you do?",
+    description: "You arrive in the town of Glendor with your friends, nasko, oliver and jack. What will you do?",
     choices: [
       { text: "Buy healing potions. Spend 200 gold (+2 Karma)", next: "chapter3", karma: 2, gold: -200, potions: 1 },
       { text: "Buy better weapons. Spend 100 gold (-2 Karma, +1 attack power)", next: "chapter3", karma: -2, gold: -100 },
@@ -21,14 +21,14 @@ const storyData =  {
     title: "Chapter 3: Quest 1 – Caravan Rescue",
     description: "A caravan is being attacked by bandits. What will you do?",
     choices: [
-      { text: "Attack the bandits (+5 Karma)", next: "outcome1", karma: 5, setJackAlive: false },
+      { text: "Attack the bandits (+5 Karma)", next: "outcome1", karma: 5, setJackAlive: true },
       { text: "Take the bandits’ offer and let them go (-5 Karma)", next: "outcome2", karma: -5 },
       { text: "Negotiate to save both goods and merchants (+10 Karma if successful, -5 Karma if unsuccessful)", next: "outcome3" },
     ],
   },
   outcome1: {
     title: "Outcome: Attack the bandits",
-    description: "You attack the bandits. If no healing potions, Jack is killed in the process. Receive 150 gold.",
+    description: "You attack the bandits. Jack is killed by a throwing dagger in the midst of battle. Receive 150 gold.",
     karmaRequirement: null,
     choices: [{ text: "Continue to Chapter 4", next: "chapter4", gold: 150 }],
   },
@@ -49,7 +49,7 @@ const storyData =  {
     description: "You venture into the dark mines. What strategy will you use?",
     choices: [
       { text: "Attack head-on (Neutral)", next: "outcome4" },
-      { text: "Let Jack disable traps and Oliver cast wards (+5 Karma, requires Jack to be alive)", next: "outcome5", karma: 5, requiresJackAlive: true },
+      { text: "Let Jack disable traps and Oliver cast wards (+5 Karma, requires Jack to be alive)",next: "outcome5", karma: 5, requiresJackAlive: true },
       { text: "Avoid the golem entirely (-5 Karma)", next: "outcome6", karma: -5 },
     ],
   },
@@ -63,7 +63,7 @@ const storyData =  {
     title: "Outcome: Disable traps and wards",
     description: "Your group defeats the golem safely. Receive 150 gold.",
     karmaRequirement: null,
-    choices: [{ text: "Continue to Chapter 5", next: "chapter5", gold: 150 }],
+    choices: [{ text: "Continue to Chapter 5",before:"chapter4", next: "chapter5", gold: 150 }],
   },
   outcome6: {
     title: "Outcome: Avoid the golem",
